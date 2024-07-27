@@ -28,12 +28,9 @@ void ClearLines(int numLines) {
 }
 
 int main () {
+	
 	//Funcion para acentos.
 	setlocale(LC_ALL, "");
-	
-	int inicio, opcion_menu;
-	char nombre[10];
-	bool aux_menu;
 	
 	 // Definir el array de cadenas
     string asciiArt[] = {
@@ -129,7 +126,58 @@ int main () {
 	"MMMMMMMMMMMMMMMWWWWWWWWWWMMMMMMMMMMMMMMM"
 	};
 	
-	cout<<"Para comenzar el juego por favor ingresa tu nombre: ";
+	string ganaste[] = {
+	"\n #####     #    #     #    #     #####  ####### ###### # ###",
+	"#     #   # #   ##    #   # #   #     #    #    #        ###",
+	"#        #   #  # #   #  #   #  #          #    #        ###",
+	"#  #### #     # #  #  # #     #  #####     #    #####     # ",
+	"#     # ####### #   # # #######       #    #    #          ",
+	"#     # #     # #    ## #     # #     #    #    #        ###",
+	" #####  #     # #     # #     #  #####     #    #######  ###"
+	};
+	
+	string quienSoy[] = {
+		"\n #####  #     # ### ####### #     #     #####  ####### #     #  ##### ",
+		"#     # #     #  #  #       ##    #    #     # #     #  #   #  #     #",
+		"#     # #     #  #  #       # #   #    #       #     #   # #         #",
+		"#     # #     #  #  #####   #  #  #     #####  #     #    #       ### ",
+		"#   # # #     #  #  #       #   # #          # #     #    #       #   ",
+		"#    #  #     #  #  #       #    ##    #     # #     #    #           ",
+		" #### #  #####  ### ####### #     #     #####  #######    #       #   "
+	};
+	
+	string graciasPorJugar[] = {
+		"\n #####  ######     #     #####  ###    #     #####     ######  ####### ######           # #     #  #####     #    ######  ",
+		"#     # #     #   # #   #     #  #    # #   #     #    #     # #     # #     #          # #     # #     #   # #   #     # ",
+		"#       #     #  #   #  #        #   #   #  #          #     # #     # #     #          # #     # #        #   #  #     # ",
+		"#  #### ######  #     # #        #  #     #  #####     ######  #     # ######           # #     # #  #### #     # ######  ",
+		"#     # #   #   ####### #        #  #######       #    #       #     # #   #      #     # #     # #     # ####### #   #   ",
+		"#     # #    #  #     # #     #  #  #     # #     #    #       #     # #    #     #     # #     # #     # #     # #    #  ",
+		" #####  #     # #     #  #####  ### #     #  #####     #       ####### #     #     #####   #####   #####  #     # #     # "
+	};
+	
+	string perdiste_asci[] = {
+		"#     #    #    #######    #######    #    #       #          #    ######  #######    ### ",
+		"#     #   # #        #     #         # #   #       #         # #   #     # #     #    ### ",
+		"#     #  #   #      #      #        #   #  #       #        #   #  #     # #     #    ### ",
+		"####### #     #    #       #####   #     # #       #       #     # #     # #     #     #  ",
+		"#     # #######   #        #       ####### #       #       ####### #     # #     #        ",
+		"#     # #     #  #         #       #     # #       #       #     # #     # #     #    ### ",
+		"#     # #     # #######    #       #     # ####### ####### #     # ######  #######    ### "
+	};
+	
+	
+	int gracias = sizeof(graciasPorJugar) / sizeof(graciasPorJugar[0]);
+	int perdiste = sizeof(perdiste_asci) / sizeof(perdiste_asci[0]);
+	
+	int nombreJuego = sizeof(quienSoy) / sizeof(quienSoy[0]);
+	for (int i = 0; i < nombreJuego; ++i) {
+    cout << quienSoy[i] << endl;
+	}
+
+	
+	char nombre[10];
+	cout<<"\nPara comenzar el juego por favor ingresa tu nombre: ";
 	cin>>nombre;
 	ClearLines(1);
 	cout<<"Bienvenid@! "<<nombre<<endl;
@@ -137,21 +185,20 @@ int main () {
 	
 	
 	bool validador = false;
-	do{
-		
-	
+	int opcion_menu;
 	cout<<"\nMenu Juego"<<endl;
 	cout<<"1. Insturcciones"<<endl;
 	cout<<"2. JUGAR"<<endl;
 	cout<<"3. Salir"<<endl;
 	cout<<"Por favor ingrese una opción del [1-3]: ";
 	cin>>opcion_menu;
+	
+	do{
 		ClearLines(5);
-	
-	
+		
 		switch(opcion_menu) {
 	    case 1:
-	    	ClearLines(10);
+	    	ClearLines(100);
 	    	cout<<"INSTRUCCIONES"<<endl;
 	    	cout<<"1. Deberas adivinar la imagen presentada, eligiendo la opcion que creas correcta, si acertas sumas 1 punto."<<endl;
 	    	cout<<"2. Ganaras el juego si logras realizar 4 aciertos con éxito. ¡Mucha suerte!"<<endl;
@@ -162,8 +209,10 @@ int main () {
 	    	cin>>opcion_menu;
 	    	if (opcion_menu == 1){
 	    		opcion_menu = 2;
-			} else {
+			} else if (opcion_menu == 0) {
 				opcion_menu = 3;
+			} else{
+				opcion_menu = 9;
 			}
 	    	validador = true;
 	    break;
@@ -173,20 +222,23 @@ int main () {
 	    	validador = false;
 	    break;
 	    case 3: 
-	    	ClearLines(10);
-	    	cout<<"Gracias por elegirnos :) s2"<<endl;
+	    	ClearLines(100);
+			for (int i = 0; i < gracias; ++i) {
+		    cout << graciasPorJugar[i] << endl;
+			}
 	    	return false;
 	    break;
 	    default: 
-	    	cout<<"La opción que elegiste no es correcta. Vuelve a intentarlo"<<endl;
+	    	ClearLines(20);
+	    	cout<<"\nLa opción que elegiste no es correcta. Vuelve a intentarlo"<<endl;
+	    	opcion_menu = 1;
 	    	validador = true;
-	}
+		}
 	}while(validador);
 		
 		
 //		########### COMIENZO DEL JUEGO ###############
-
-	bool validador_juego = true;	
+	
 	int contador_juego = 0;
 	int opcion_juego_elegida = 0;
 	
@@ -197,10 +249,11 @@ int main () {
         cout << asciiArt[i] << endl;
     	}
     	
+    	cout<<"\n¡Que LENGUAJE de PROGRAMACIÓN es?";
 	    cout<<"\n1. JavaScript"<<endl;
 		cout<<"2. C#"<<endl;
 		cout<<"3. PHP"<<endl;
-		cout<<"\nPor favor ingrese una opción del [1-3]: ";
+		cout<<"\nElija una opción del [1-3]: ";
 		cin>>opcion_juego_elegida;
 		
 		if (opcion_juego_elegida == 3) {
@@ -214,10 +267,11 @@ int main () {
 	        cout << img_js[i] << endl;
     	}
     	
+    	cout<<"\n¡Que LENGUAJE de PROGRAMACIÓN es?";
     	cout<<"\n1. JavaScript"<<endl;
 		cout<<"2. React"<<endl;
 		cout<<"3. Typescript"<<endl;
-		cout<<"\nPor favor ingrese una opción del [1-3]: ";
+		cout<<"\nElija una opción del [1-3]: ";
 		cin>>opcion_juego_elegida;
 		
 		if (opcion_juego_elegida == 1) {
@@ -227,14 +281,15 @@ int main () {
 		//	***** Tercera Imagen ********
 		ClearLines(100);
 		int java = sizeof(img_java) / sizeof(img_java[0]);
-		for (int i = 0; i < js; ++i) {
+		for (int i = 0; i < java; ++i) {
 	        cout << img_java[i] << endl;
     	}
     	
+    	cout<<"\n¡Que LENGUAJE de PROGRAMACIÓN es?";
     	cout<<"\n1. JavaScript"<<endl;
 		cout<<"2. Java"<<endl;
 		cout<<"3. MScript"<<endl;
-		cout<<"\nPor favor ingrese una opción del [1-3]: ";
+		cout<<"\nElija una opción del [1-3]: ";
 		cin>>opcion_juego_elegida;
 		
 		if (opcion_juego_elegida == 2) {
@@ -245,14 +300,15 @@ int main () {
         
         ClearLines(100);
 		int python = sizeof(img_python)	/ sizeof(img_python[0]);
-		for (int i = 0; i < js; ++i) {
+		for (int i = 0; i < python; ++i) {
 	        cout << img_python[i] << endl;
     	}
     	
+    	cout<<"\n¡Que LENGUAJE de PROGRAMACIÓN es?";
     	cout<<"\n1. Python"<<endl;
 		cout<<"2. C++"<<endl;
 		cout<<"3. COBOL"<<endl;
-		cout<<"\nPor favor ingrese una opción del [1-3]: ";
+		cout<<"\nElija una opción del [1-3]: ";
 		cin>>opcion_juego_elegida;
 		
 		if (opcion_juego_elegida == 1) {
@@ -263,9 +319,19 @@ int main () {
 		
 		ClearLines(100);
 		cout<<"Tuviste "<<contador_juego<<" aciertos."<<endl;
+		int win = sizeof(ganaste) / sizeof(ganaste[0]);
+		
 		if(contador_juego == 4){
+			for (int i = 0; i < win; ++i) {
+	        cout << ganaste[i] << endl;
+    	}
 			cout<<"\nFELICIDADES! Ganaste el JUEGO!"<<endl;
 		}else{
+			
+			for (int i = 0; i < perdiste; ++i) {
+			    cout << perdiste_asci[i] << endl;
+			}
+	
 			cout<<"\nPerdiste, vuelve a intentarlo! ;)"<<endl;
 		}
         
